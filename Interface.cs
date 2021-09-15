@@ -16,9 +16,11 @@ namespace oleadmindb
     {
         List<string> passwords = new List<string> { };
         List<bool> mitclick = new List<bool> { false,false };
+        bool yourrights;
         public Interface(bool rechte, string username, string password,string ID)
         {
             InitializeComponent();
+            yourrights = rechte;
             mitclick[0] = false;
             mitclick[1] = true;
             panel1.Visible = false;
@@ -63,10 +65,7 @@ namespace oleadmindb
             {
                 checkBox1.Visible = false;
                 checkBox1.Checked = rechte;
-                button1.Visible = false;
                 button2.Visible = false;
-                button3.Visible = false;
-                button4.Visible = false;
             }
             else
             {
@@ -180,17 +179,39 @@ namespace oleadmindb
             con.ConnectionString = "Provider = Microsoft.Jet.OLEDB.4.0;" + "Data Source = " + dBbez;
 
             cmd.Connection = con;
-            cmd.CommandText = "Select * from Kontostand;";
 
-            con.Open();
 
-            OleDbDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            if (yourrights == true)
             {
-                dataGridView1.Rows.Add(reader.GetString(3), reader.GetString(4), reader.GetInt32(2), Truncate(reader.GetDateTime(1).ToString(),10));
+                cmd.CommandText = "Select * from Kontostand;";
+
+                con.Open();
+
+                OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dataGridView1.Rows.Add(reader.GetString(3), reader.GetString(4), reader.GetInt32(2), Truncate(reader.GetDateTime(1).ToString(), 10));
+                }
+                reader.Close();
+                con.Close();
             }
-            reader.Close();
-            con.Close();
+            else if (yourrights == false)
+            {
+                cmd.CommandText = "Select * from Kontostand Where Kunde = @Kunde;";
+                cmd.Parameters.AddWithValue("@Kunde",setting.Default.name);
+
+
+                con.Open();
+
+                OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dataGridView1.Rows.Add(reader.GetString(3), reader.GetString(4), reader.GetInt32(2), Truncate(reader.GetDateTime(1).ToString(), 10));
+                }
+                reader.Close();
+                con.Close();
+            }
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
