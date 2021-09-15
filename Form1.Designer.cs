@@ -40,25 +40,29 @@ namespace oleadmindb
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(10, 36);
+            this.textBox1.Location = new System.Drawing.Point(13, 54);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(234, 20);
+            this.textBox1.Size = new System.Drawing.Size(311, 22);
             this.textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(10, 93);
+            this.textBox2.Location = new System.Drawing.Point(13, 114);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(234, 20);
+            this.textBox2.Size = new System.Drawing.Size(311, 22);
             this.textBox2.TabIndex = 1;
+            this.textBox2.UseSystemPasswordChar = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.label1.Location = new System.Drawing.Point(10, 11);
+            this.label1.Location = new System.Drawing.Point(13, 14);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 25);
+            this.label1.Size = new System.Drawing.Size(122, 32);
             this.label1.TabIndex = 2;
             this.label1.Text = "Username";
             // 
@@ -66,18 +70,20 @@ namespace oleadmindb
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.label2.Location = new System.Drawing.Point(10, 65);
+            this.label2.Location = new System.Drawing.Point(13, 80);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 25);
+            this.label2.Size = new System.Drawing.Size(112, 32);
             this.label2.TabIndex = 3;
             this.label2.Text = "Password";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.button1.Location = new System.Drawing.Point(5, 137);
+            this.button1.Location = new System.Drawing.Point(7, 169);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 32);
+            this.button1.Size = new System.Drawing.Size(103, 39);
             this.button1.TabIndex = 4;
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
@@ -87,9 +93,10 @@ namespace oleadmindb
             // 
             this.button2.Cursor = System.Windows.Forms.Cursors.Default;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.button2.Location = new System.Drawing.Point(165, 137);
+            this.button2.Location = new System.Drawing.Point(220, 169);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 32);
+            this.button2.Size = new System.Drawing.Size(104, 39);
             this.button2.TabIndex = 5;
             this.button2.Text = "Register";
             this.button2.UseVisualStyleBackColor = true;
@@ -98,9 +105,10 @@ namespace oleadmindb
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(5, 115);
+            this.checkBox1.Location = new System.Drawing.Point(7, 142);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(97, 17);
+            this.checkBox1.Size = new System.Drawing.Size(125, 21);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "Remember me!";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -108,10 +116,10 @@ namespace oleadmindb
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCoral;
-            this.ClientSize = new System.Drawing.Size(254, 179);
+            this.ClientSize = new System.Drawing.Size(339, 220);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -120,6 +128,7 @@ namespace oleadmindb
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

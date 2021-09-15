@@ -37,7 +37,7 @@ namespace oleadmindb
             OleDbConnection con = new OleDbConnection();
             OleDbCommand cmd = new OleDbCommand();
 
-            string dBbez = "Mitarbeiter.mdb";
+            string dBbez = @"C:\\Users\\gaimn\\source\\repos\\AnimeTheNeko\\oleadmindb\\Mitarbeiter.mdb";
 
             con.ConnectionString = "Provider = Microsoft.Jet.OLEDB.4.0;" + "Data Source = " + dBbez;
 
@@ -55,7 +55,7 @@ namespace oleadmindb
                     {
                         bool rechte = (bool)reader["admin"];
                         this.Hide();
-                        Interface form = new Interface(rechte);
+                        Interface form = new Interface(rechte,reader.GetString(0),reader.GetString(1));
                         form.Show();
                         break;
                     }
