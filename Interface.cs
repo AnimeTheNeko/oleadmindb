@@ -15,13 +15,14 @@ namespace oleadmindb
     public partial class Interface : Form
     {
         List<string> passwords = new List<string> { };
-        bool mitclick = false;
+        List<bool> mitclick = new List<bool> { false,false };
         public Interface(bool rechte, string username, string password,string ID)
         {
             InitializeComponent();
-            mitclick = false;
+            mitclick[0] = false;
+            mitclick[1] = true;
             panel1.Visible = false;
-
+            button6.Visible = true;
 
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add("Column0", "Game");
@@ -84,9 +85,11 @@ namespace oleadmindb
 
         private void button2_Click(object sender, EventArgs e)
         {
+            button6.Visible = false;
             panel1.Visible = true;
             passwords.Clear();
-            mitclick = true;
+            mitclick[0] = true;
+            mitclick[1] = false;
 
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add("Column0", "Username");
@@ -125,8 +128,10 @@ namespace oleadmindb
 
         private void button3_Click(object sender, EventArgs e)
         {
+            button6.Visible = true;
             panel1.Visible = false;
-            mitclick = false;
+            mitclick[0] = false;
+            mitclick[1] = true;
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add("Column0", "Game");
             dataGridView1.Columns.Add("Column1", "Copys");
@@ -156,8 +161,10 @@ namespace oleadmindb
 
         private void button4_Click(object sender, EventArgs e)
         {
+            button6.Visible = false;
             panel1.Visible = false;
-            mitclick = false;
+            mitclick[0] = false;
+            mitclick[1] = false;
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add("Column0", "Person");
             dataGridView1.Columns.Add("Column1", "Product");
@@ -218,17 +225,28 @@ namespace oleadmindb
                 MessageBox.Show(ex.Message);
             }
         }
-
+        int index=0;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (mitclick == true)
+            if (mitclick[0] == true)
             {
-                int index = e.RowIndex;
+                index = 0;
+                index = e.RowIndex;
                 textBox1.Text = dataGridView1.Rows[index].Cells[0].Value.ToString(); 
                 textBox2.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();
                 checkBox1.Checked = bool.Parse(dataGridView1.Rows[index].Cells[2].Value.ToString());
                 index++;
                 textBox3.Text = index.ToString();
+            }
+            else if(mitclick[1]==true)
+            {
+                index = 0;
+                index = e.RowIndex;
+                List<string> row = new List<string> { };
+                for (int i = 0; i < dataGridView1.ColumnCount; i++)
+                {
+                    row.Add(dataGridView1.Rows[index].Cells[i].Value.ToString());
+                }
             }
             else
             {
@@ -236,9 +254,19 @@ namespace oleadmindb
             }
         }
 
-        private void Interface_FormClosed(object sender, FormClosedEventArgs e)
-        {
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            List<string> row = new List<string> { };
+            if (mitclick[1] == true)
+            {
+                for (int i = 0; i < dataGridView1.ColumnCount; i++)
+                {
+                    row.Add(dataGridView1.Rows[index].Cells[i].Value.ToString());
+                }
+            }
+            buying buy = new buying(row);
+            buy.Show();
         }
     }
 }
