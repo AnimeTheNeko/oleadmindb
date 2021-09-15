@@ -27,41 +27,35 @@ namespace oleadmindb
 
 
 
-            //try
-            //{
-            //    OleDbConnection con = new OleDbConnection();
-            //    OleDbCommand cmd = new OleDbCommand();
+            try
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand cmd = new OleDbCommand();
 
-            //    string dBbez = "Mitarbeiter.mdb";
+                string dBbez = @"C:\\Users\\gaimn\\source\\repos\\AnimeTheNeko\\oleadmindb\\Mitarbeiter.mdb";
 
-            //    con.ConnectionString = "Provider = Microsoft.Jet.OLEDB.4.0;" + "Data Source = " + dBbez;
-
-            //    cmd.Connection = con;
-            //    cmd.CommandText = "Select * from Angestellte;";
+                con.ConnectionString = "Provider = Microsoft.Jet.OLEDB.4.0;" + "Data Source = " + dBbez;
 
 
-            //    con.Open();
-            //    int i = 0;
-            //    OleDbDataReader reader = cmd.ExecuteReader();
-            //    while (reader.Read())
-            //    {
-            //        i = reader.GetInt32(0);
-            //    }
-            //    reader.Close();
-            //    cmd = new OleDbCommand("INSERT INTO Customers (ID, Username,passwort,admin) VALUES (?, ?, ?, ?)", con);
+                cmd.Connection = con;
 
-            //    cmd.Parameters.Add("ID", OleDbType.Integer, i++, "ID");
-            //    cmd.Parameters.Add("Username", OleDbType.VarChar, 40, "Username");
+                cmd.CommandText = "INSERT INTO Angestellte ([Username],[passwort]) VALUES (@username,@Password)";
+                //add named parameters
+                cmd.Parameters.Add("@Username", OleDbType.VarChar, 40).Value = textBox1.Text;
+                cmd.Parameters.Add("@passwort", OleDbType.VarChar, 40).Value = textBox2.Text;
+                con.Open();
+                cmd.ExecuteNonQuery();
 
 
-            //    OleDbDataAdapter adapter = new OleDbDataAdapter();
-            //    MessageBox.Show("You have been added");
-            //    con.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+                con.Close();
+
+                MessageBox.Show("done!");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
 
         }

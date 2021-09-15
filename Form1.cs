@@ -32,7 +32,7 @@ namespace oleadmindb
         private void button1_Click(object sender, EventArgs e)
         {
             savesetting();
-
+            bool enter = false;
 
             OleDbConnection con = new OleDbConnection();
             OleDbCommand cmd = new OleDbCommand();
@@ -42,20 +42,22 @@ namespace oleadmindb
             con.ConnectionString = "Provider = Microsoft.Jet.OLEDB.4.0;" + "Data Source = " + dBbez;
 
             cmd.Connection = con;
-            cmd.CommandText = "Select Username,passwort,admin from Angestellte;";
+            cmd.CommandText = "Select ID,Username,passwort,admin from Angestellte;";
 
             con.Open();
 
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                if (textBox1.Text == reader.GetString(0).ToString())
+                if (textBox1.Text == reader.GetString(1).ToString())
                 {
-                    if (textBox2.Text == reader.GetString(1).ToString())
+                    if (textBox2.Text == reader.GetString(2).ToString())
                     {
+                        enter = true;
                         bool rechte = (bool)reader["admin"];
+                        string ID = (string)reader["ID"].ToString();
                         this.Hide();
-                        Interface form = new Interface(rechte,reader.GetString(0),reader.GetString(1));
+                        Interface form = new Interface(rechte,reader.GetString(1),reader.GetString(2),ID);
                         form.Show();
                         break;
                     }
@@ -64,6 +66,10 @@ namespace oleadmindb
             }
             reader.Close();
             con.Close();
+            if (enter == false)
+            {
+                MessageBox.Show("login nicht möglich");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

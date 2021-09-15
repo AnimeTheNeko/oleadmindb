@@ -14,7 +14,7 @@ namespace oleadmindb
     public partial class Interface : Form
     {
         List<string> passwords = new List<string> { };
-        public Interface(bool rechte, string username, string password)
+        public Interface(bool rechte, string username, string password,string ID)
         {
             InitializeComponent();
 
@@ -54,7 +54,7 @@ namespace oleadmindb
 
 
 
-
+            textBox3.Text = ID;
             label1.Text += " "+username;
             label2.Text += " " +password;
             checkBox1.Checked = rechte;
@@ -163,7 +163,38 @@ namespace oleadmindb
 
         private void button5_Click(object sender, EventArgs e)
         {
+            try
+            {
+                OleDbConnection con = new OleDbConnection();
+                OleDbCommand cmd = new OleDbCommand();
 
+                string dBbez = @"C:\\Users\\gaimn\\source\\repos\\AnimeTheNeko\\oleadmindb\\Mitarbeiter.mdb";
+
+                con.ConnectionString = "Provider = Microsoft.Jet.OLEDB.4.0;" + "Data Source = " + dBbez;
+
+
+                cmd.Connection = con;
+
+                cmd.CommandText = "UPDATE Angestellte SET Username = @Username, passwort = @passwort, admin = @admin WHERE ID = @id";
+
+                cmd.Parameters.Add("@Username", OleDbType.VarChar, 40).Value = textBox1.Text;
+                cmd.Parameters.Add("@passwort", OleDbType.VarChar, 40).Value = textBox2.Text;
+                cmd.Parameters.Add("@admin",OleDbType.Boolean, 2).Value = checkBox1.Checked;
+                cmd.Parameters.Add("@id", OleDbType.Integer, 40).Value = textBox3.Text;
+
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+
+                con.Close();
+
+                MessageBox.Show("done!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
