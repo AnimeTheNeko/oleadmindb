@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using System.Data.OleDb;
 
 namespace oleadmindb
@@ -37,7 +38,10 @@ namespace oleadmindb
             OleDbConnection con = new OleDbConnection();
             OleDbCommand cmd = new OleDbCommand();
 
-            string dBbez = @"C:\\Users\\gaimn\\source\\repos\\AnimeTheNeko\\oleadmindb\\Mitarbeiter.mdb";
+            string workingDirectory = Environment.CurrentDirectory;
+            string dBbez = Directory.GetParent(workingDirectory).Parent.FullName+ "\\Mitarbeiter.mdb";
+
+
 
             con.ConnectionString = "Provider = Microsoft.Jet.OLEDB.4.0;" + "Data Source = " + dBbez;
 
