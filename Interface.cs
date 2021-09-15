@@ -45,7 +45,7 @@ namespace oleadmindb
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                dataGridView1.Rows.Add(reader.GetString(0), reader.GetInt32(1), reader.GetInt32(2));
+                dataGridView1.Rows.Add(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3));
             }
             reader.Close();
             con.Close();
@@ -153,7 +153,7 @@ namespace oleadmindb
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                dataGridView1.Rows.Add(reader.GetString(0), reader.GetInt32(1), reader.GetInt32(2));
+                dataGridView1.Rows.Add(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3));
             }
             reader.Close();
             con.Close();
@@ -187,7 +187,7 @@ namespace oleadmindb
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                dataGridView1.Rows.Add(reader.GetString(3), reader.GetString(4), reader.GetInt32(2),reader.GetDateTime(1).ToString());
+                dataGridView1.Rows.Add(reader.GetString(3), reader.GetString(4), reader.GetInt32(2), Truncate(reader.GetDateTime(1).ToString(),10));
             }
             reader.Close();
             con.Close();
@@ -228,30 +228,38 @@ namespace oleadmindb
         int index=0;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (mitclick[0] == true)
+            try
             {
-                index = 0;
-                index = e.RowIndex;
-                textBox1.Text = dataGridView1.Rows[index].Cells[0].Value.ToString(); 
-                textBox2.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();
-                checkBox1.Checked = bool.Parse(dataGridView1.Rows[index].Cells[2].Value.ToString());
-                index++;
-                textBox3.Text = index.ToString();
-            }
-            else if(mitclick[1]==true)
-            {
-                index = 0;
-                index = e.RowIndex;
-                List<string> row = new List<string> { };
-                for (int i = 0; i < dataGridView1.ColumnCount; i++)
+                if (mitclick[0] == true)
                 {
-                    row.Add(dataGridView1.Rows[index].Cells[i].Value.ToString());
+                    index = 0;
+                    index = e.RowIndex;
+                    textBox1.Text = dataGridView1.Rows[index].Cells[0].Value.ToString();
+                    textBox2.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();
+                    checkBox1.Checked = bool.Parse(dataGridView1.Rows[index].Cells[2].Value.ToString());
+                    index++;
+                    textBox3.Text = index.ToString();
+                }
+                else if (mitclick[1] == true)
+                {
+                    index = 0;
+                    index = e.RowIndex;
+                    List<string> row = new List<string> { };
+                    for (int i = 0; i < dataGridView1.ColumnCount; i++)
+                    {
+                        row.Add(dataGridView1.Rows[index].Cells[i].Value.ToString());
+                    }
+                }
+                else
+                {
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
+            
         }
 
 
@@ -265,8 +273,26 @@ namespace oleadmindb
                     row.Add(dataGridView1.Rows[index].Cells[i].Value.ToString());
                 }
             }
-            buying buy = new buying(row);
+            buying buy = new buying(row, index);
             buy.Show();
+        }
+
+        public string Truncate(string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            textBox2.UseSystemPasswordChar = !textBox2.UseSystemPasswordChar;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            form.Show();
+            this.Close();
         }
     }
 }
