@@ -231,7 +231,7 @@ namespace oleadmindb
 
                 OleDbCommand cmd = new OleDbCommand(SqlString, con);
                 cmd.Parameters.AddWithValue("@Username", textBox1.Text);
-                cmd.Parameters.AddWithValue("@passwort", textBox2.Text);
+                cmd.Parameters.AddWithValue("@passwort", passwords[int.Parse(textBox3.Text)-1]);
                 cmd.Parameters.AddWithValue("@admin", checkBox1.Checked);
 
                 con.Open();
