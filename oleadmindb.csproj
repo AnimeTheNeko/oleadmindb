@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auswahl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auswahl.Designer.cs">
+      <DependentUpon>Auswahl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="bankinterface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="bankinterface.Designer.cs">
+      <DependentUpon>bankinterface.cs</DependentUpon>
+    </Compile>
     <Compile Include="buying.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +89,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>setting.settings</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Auswahl.resx">
+      <DependentUpon>Auswahl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="buying.resx">
       <DependentUpon>buying.cs</DependentUpon>
     </EmbeddedResource>

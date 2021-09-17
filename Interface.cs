@@ -17,7 +17,7 @@ namespace oleadmindb
         List<string> passwords = new List<string> { };
         List<bool> mitclick = new List<bool> { false,false };
         bool yourrights;
-        public Interface(bool rechte, string username, string password,string ID)
+        public Interface(bool rechte, string username, string password, string ID)
         {
             InitializeComponent();
             yourrights = rechte;

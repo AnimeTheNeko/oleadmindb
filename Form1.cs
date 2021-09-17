@@ -23,6 +23,10 @@ namespace oleadmindb
                 textBox1.Text = setting.Default.name;
                 textBox2.Text = setting.Default.password;
                 checkBox1.Checked = true;
+                
+                Auswahl from = new Auswahl();
+                from.Show();
+                this.Hide();
             }
             else if (setting.Default.rememberme == false)
             {
@@ -61,7 +65,7 @@ namespace oleadmindb
                         bool rechte = (bool)reader["admin"];
                         string ID = (string)reader["ID"].ToString();
                         this.Hide();
-                        Interface form = new Interface(rechte,reader.GetString(1),reader.GetString(2),ID);
+                        Auswahl form = new Auswahl(rechte,reader.GetString(1),reader.GetString(2),ID);
                         form.Show();
                         break;
                     }
