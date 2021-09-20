@@ -23,10 +23,6 @@ namespace oleadmindb
                 textBox1.Text = setting.Default.name;
                 textBox2.Text = setting.Default.password;
                 checkBox1.Checked = true;
-                
-                Auswahl from = new Auswahl();
-                from.Show();
-                this.Hide();
             }
             else if (setting.Default.rememberme == false)
             {
